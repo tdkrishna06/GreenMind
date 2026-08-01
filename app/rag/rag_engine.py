@@ -50,33 +50,46 @@ Prevention:
         documents.append(
             Document(
                 page_content=text,
-                metadata={"disease": disease}
+                metadata={
+                    "disease": disease
+                }
             )
         )
+
 
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=500,
         chunk_overlap=50
     )
 
-    docs = splitter.split_documents(documents)
+
+    docs = splitter.split_documents(
+        documents
+    )
+
 
     db = FAISS.from_documents(
         docs,
         embedding
     )
 
-    db.save_local(str(VECTOR_DB))
+
+    db.save_local(
+        str(VECTOR_DB)
+    )
+
 
 
 def ask_greenmind(
     disease_name,
     confidence,
     remedy,
-    question
+    question,
+    language="English"
 ):
 
     build_database()
+
 
     db = FAISS.load_local(
         str(VECTOR_DB),
@@ -84,16 +97,21 @@ def ask_greenmind(
         allow_dangerous_deserialization=True
     )
 
+
     docs = db.similarity_search(
         question,
         k=3
     )
 
+
     context = "\n\n".join(
-        doc.page_content for doc in docs
+        doc.page_content
+        for doc in docs
     )
 
+
     remedy_text = ""
+
 
     if remedy:
 
@@ -108,33 +126,70 @@ Prevention:
 {', '.join(remedy.get('prevention', []))}
 """
 
-    prompt = f"""
-You are GreenMind AI, an agricultural expert.
 
-Detected Disease:
+    if language == "Tamil":
+
+        response_language = """
+Respond completely in Tamil language.
+Use simple Tamil words that farmers can easily understand.
+Do not use English unless the technical word is unavoidable.
+"""
+
+    else:
+
+        response_language = """
+Respond completely in English language.
+Use simple agricultural terms that farmers can understand.
+"""
+
+
+    prompt = f"""
+
+You are GreenMind AI, an expert agricultural assistant.
+
+Language Instruction:
+{response_language}
+
+
+Detected Plant Disease:
+
 {disease_name}
 
-Prediction Confidence:
+
+AI Prediction Confidence:
+
 {confidence * 100:.2f}%
 
+
 Disease Information:
+
 {remedy_text}
 
-Knowledge Retrieved From Database:
+
+Retrieved Knowledge:
+
 {context}
 
+
 Farmer Question:
+
 {question}
 
-Rules:
 
-1. Answer only using the disease information and retrieved knowledge.
-2. Recommend traditional and eco-friendly farming practices whenever possible.
-3. Keep the answer simple and practical.
-4. If the user asks in Tamil, answer in Tamil.
-5. If the answer is unavailable, reply:
+
+Answer Rules:
+
+1. Answer only based on the provided agricultural knowledge.
+2. Explain the disease clearly.
+3. Provide practical traditional and organic remedies.
+4. Provide prevention methods when useful.
+5. Keep the response simple and farmer-friendly.
+6. Do not create false information.
+7. If information is unavailable, say:
 "I don't have enough agricultural information."
+
 """
+
 
     response = chat(
         model="qwen2.5:3b",
@@ -145,5 +200,6 @@ Rules:
             }
         ]
     )
+
 
     return response["message"]["content"]
