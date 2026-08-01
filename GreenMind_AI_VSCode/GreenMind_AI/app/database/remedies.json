@@ -1,0 +1,51 @@
+{
+  "healthy": {
+    "description": "The classifier found no visible disease pattern in this image.",
+    "severity": "None detected",
+    "symptoms": ["Leaf colour and structure appear consistent with a healthy sample.", "Continue checking new growth weekly."],
+    "cause": "No disease pattern identified by the model.",
+    "traditional_remedy": ["Use mature cow-dung compost or vermicompost to support soil health.", "Apply diluted panchagavya only according to local guidance."],
+    "organic_remedy": ["No treatment is required; avoid preventive spraying without need.", "Remove only damaged or senescent leaves with clean tools."],
+    "application": "Inspect weekly, especially after rain or irrigation.",
+    "prevention": ["Water at soil level in the morning.", "Maintain airflow with correct spacing.", "Clean tools between plants and rotate crops where practical."]
+  },
+  "disease": {
+    "description": "The model identified a visual pattern consistent with {disease}. Confirm in the field before applying treatment.",
+    "severity": "Monitor closely",
+    "symptoms": ["Look for expanding spots, discolouration, curling, or lesions.", "Compare nearby plants and inspect both leaf surfaces."],
+    "cause": "May be associated with fungal, bacterial, viral, or pest pressure; a field inspection confirms the cause.",
+    "traditional_remedy": ["Remove heavily affected leaves and dispose of them away from the compost pile.", "Use a neem-oil spray only at the label dilution and test it on a few leaves first.", "Keep soil covered with clean organic mulch; do not let mulch touch stems."],
+    "organic_remedy": ["Improve airflow and keep foliage dry by watering at soil level.", "For fungal-looking symptoms, consider an approved organic treatment after local advice.", "Avoid mixing home remedies or exceeding product directions."],
+    "application": "Recheck after 5–7 days. Treat in cool, dry conditions and stop if foliage shows burn.",
+    "prevention": ["Use disease-free seedling material.", "Rotate crops and remove volunteer plants.", "Sanitize pruning tools and avoid handling wet foliage.", "Use balanced compost rather than excess nitrogen."]
+  },
+  "Tomato___Late_blight": {
+    "scientific_name": "Phytophthora infestans",
+    "severity": "High — can spread quickly in cool, wet weather",
+    "symptoms": ["Water-soaked dark patches often begin at leaf edges.", "Brown lesions may expand rapidly after rain or overhead irrigation."],
+    "cause": "Oomycete infection favoured by prolonged leaf wetness and cool, humid conditions."
+  },
+  "Potato___Late_blight": {
+    "scientific_name": "Phytophthora infestans",
+    "severity": "High — act promptly and seek local extension guidance",
+    "symptoms": ["Dark, water-soaked leaf lesions can spread rapidly.", "White growth may appear under leaves in humid weather."],
+    "cause": "Oomycete infection favoured by humid, cool conditions."
+  },
+  "Tomato___Early_blight": {
+    "scientific_name": "Alternaria solani",
+    "severity": "Moderate",
+    "symptoms": ["Older leaves can develop brown spots with concentric rings.", "Yellowing may surround the lesions."],
+    "cause": "Fungal disease often encouraged by wet foliage and stressed plants."
+  },
+  "Apple___Apple_scab": {
+    "scientific_name": "Venturia inaequalis",
+    "severity": "Moderate",
+    "symptoms": ["Olive-brown to black velvety leaf spots.", "Spots can appear on fruit as the season progresses."],
+    "cause": "Fungal spores spread in wet spring conditions."
+  },
+  "Tomato___Tomato_Yellow_Leaf_Curl_Virus": {
+    "severity": "High — manage vectors and remove severely affected plants",
+    "symptoms": ["Upward leaf curling and yellowing of new growth.", "Stunted plant growth and reduced fruit set."],
+    "cause": "Viral disease commonly transmitted by whiteflies."
+  }
+}

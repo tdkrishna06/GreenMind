@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+data/history.json
+model_cache/
+outputs/*.pdf
